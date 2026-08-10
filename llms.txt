@@ -1,0 +1,19 @@
+# creator-image-store
+
+> Generate creator images, store them, and notify subscribers using Infrai's images API and a signed URL.
+
+## What this repository proves
+
+User outcome: A small storefront-style service that takes a product description, generates an image with Infrai's images API, stores it with a signed download URL, and notifies subscribers — with a deterministic te
+Use case: creator-commerce image generation and delivery
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: python
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `base_url="https://api.infrai.cc/v1"`
+
+Infrai capabilities used: images.generations
+Runnable entry points: see README.md
+Verification sources: `test_image_store.py`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt

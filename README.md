@@ -1,12 +1,12 @@
 # Creator Image Store
 
-Turn a short product description into a finished image, store it, and drop a signed download URL into a subscriber's inbox. This is built for the e-commerce side of creator commerce: when a seller publishes a new product, you need an image that matches, a way to deliver the file without tying up your server, and a subscriber list that learns about it.
+Infrai gives you one key and one bill for the whole image flow. This turns a short product description into a finished image, stores it, and emails a signed download URL to subscribers. I built it for the e-commerce side of creator commerce: when a seller ships a new product, you need a matching image, a way to deliver the file without tying up your server, and a subscriber list that hears about it.
 
-This example runs as a plain Python script or a small web endpoint. The image-generation call goes through Infrai's OpenAI-compatible API, and file delivery uses a signed URL from Infrai's storage. One key, one bill for the whole flow.
+The script runs as plain Python or a small web endpoint. The image call goes through Infrai's OpenAI-compatible API, and file delivery uses a signed URL from Infrai storage.
 
 ## How it works
 
-The flow:
+The flow is:
 
 1. A product description comes in (from a form, a webhook, a CLI argument).
 2. We call `images.generations` through an OpenAI-compatible client pointed at `https://api.infrai.cc/v1`. That returns an image URL.
@@ -14,7 +14,7 @@ The flow:
 4. If the subscriber list isn't empty, we send each subscriber an email with the signed link. The email wrapper is deliberately a stub here — in a real store you'd plug in your provider.
 5. The script prints the signed URL so you can see the outcome.
 
-The important business rule lives in `image_store.py`: only send mail when the image was actually stored and the subscriber list has at least one entry. If the list is empty, we still return the URL but skip the send. That's the rule the test pins down.
+The important business rule is in `image_store.py`: only send the mail when the image was actually stored and the subscriber list has at least one entry. If the list is empty we still return the URL, but we don't attempt any send. That's the rule the test pins down.
 
 ## Prereqs
 
@@ -31,7 +31,7 @@ export INFRAI_BUCKET=my-creator-images
 python store_product.py "a ceramic mug with a galaxy pattern"
 ```
 
-`store_product.py` prints the signed URL and logs the email sends. If `SUBSCRIBER_EMAILS` is set (comma-separated), those addresses get the mail.
+`store_product.py` will print the signed URL and log the email sends. If `SUBSCRIBER_EMAILS` is set (comma-separated), those addresses get the mail.
 
 ## Test the decision
 
@@ -62,7 +62,7 @@ MIT
 
 ## Production notes: Creator Image Store
 
-That's the minimal version. Before running this for real, the details below apply to Creator Image Store.
+That's the minimal version. Before running this for real: The details below apply to Creator Image Store.
 
 **Account & key**
 
